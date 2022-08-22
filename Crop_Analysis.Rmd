@@ -1,0 +1,78 @@
+---
+title: "65k Dataset - tentativa 10"
+author: "Renan Magalhães"
+date: "09/05/2022"
+output: html_document
+---
+```{r}
+rm(list=ls())
+```
+
+
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(dplyr)
+```
+
+
+```{r}
+read_excel()
+```
+
+```{r}
+crops <- read_excel("Tabela_Geral_1.xlsx", sheet = 3, col_names = TRUE)
+```
+
+crop
+```{r}
+crops1 <- crops %>%
+  unite("Rotation", OI_2013:PV_2032, sep = "_", na.rm = TRUE)
+```
+
+```{r}
+
+crops3 <- crops1 %>%
+  group_by(Depto...8) %>%
+  count(Rotation, sort = TRUE) %>%
+  top_n(5)
+
+```
+
+```{r}
+crops4 <- crops1 %>%
+  filter(Tolerancia == 7) %>%
+  count(Rotation, sort = TRUE)
+```
+
+
+
+```{r}
+crops5 <- crops1 %>%
+  filter(Tenedor == "Si") %>%
+  count(Rotation, sort = TRUE)
+```
+
+```{r}
+crops6 <- crops1 %>%
+  filter(Tenedor == "No") %>%
+  count(Rotation, sort = TRUE)
+```
+
+```{r}
+crops7 <- crops1 %>%
+  filter(`Plan modificado? 1= SI` == 1) %>%
+  count(Rotation, sort = TRUE)
+
+```
+
+
+
+```{r}
+crops7 <- crops1 %>%
+  filter(`Plan modificado? 1= SI` == 1) %>%
+  group_by(`Depto...8`, Tenedor, )
+```
+
+
